@@ -1,24 +1,15 @@
 {
-  "name": "05webpack",
+  "name": "webpack",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^3.3.1",
-    "webpack": "^4.26.0",
-    "webpack-cli": "^3.1.2"
-  },
-  "devDependencies": {
-    "css-loader": "^1.0.1",
-    "html-webpack-plugin": "^3.2.0",
-    "style-loader": "^0.23.1",
-    "webpack-dev-server": "^3.1.10"
+    "webpack": "^5.72.1"
   }
 }
