@@ -7,9 +7,10 @@
         "webpack": "webpack"
     },
     "keywords": [],
-    "author": "",
+    "author": "yaogengzhu",
     "license": "ISC",
     "dependencies": {
+        "raw-loader": "^4.0.2",
         "webpack": "^5.72.1"
     },
     "devDependencies": {

@@ -1,6 +1,7 @@
 const path = require('path')
 
 module.exports = {
+  mode: 'production',
   entry: {
     index: './src/index.js',
     search: './src/search.js'
@@ -10,5 +11,9 @@ module.exports = {
     filename: '[name].js',
     path: path.join(__dirname, 'dist/js')
   },
-  mode: 'production'
+  module: {
+    rules: [
+      { test: /\.txt$/, use: 'raw-loader' }
+    ],
+  },
 }
