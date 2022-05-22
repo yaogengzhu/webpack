@@ -170,3 +170,29 @@ pnpm add url-loader -D
   ]
 },
 ```
+
+### 修改webpack的文件监听
+
+文件监听是在发现源码发生变化时，自动重新构建出新的输出文件。
+
+webpack开启监听模式，有两种方式：
+- 启动 webpack 命令式， 带上 -- watch 参数
+- 在配置webpack.config.js 中设置 watch: true
+
+
+**文件监听原理分析**
+
+轮询判断文件的最后编辑时间是否发生变化
+
+某个文件发生了变化，并不会立即告诉监听者，而是先缓存起来，等 aggregateTimeout 
+
+```js
+modules.export = {
+  watch: true, // 默认为false
+  watchOptions: {
+    ignore: /node_modules/, // 忽略文件
+    aggregateTimeout: 300, // 监听到文件变化后等300ms再去执行，默认300ms
+    poll: 1000, // 判断文件是否发生变化时通过不停的询问系统指定文件有没有发生变化时现的，默认每秒1000次
+  }
+}
+```
