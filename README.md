@@ -236,3 +236,48 @@ Bundle server: 提供给文件在浏览器的访问
 HRM runtime: 会被注入到浏览器，将更新文件的变化
 
 bundle.js: 构建输出的文件
+
+
+### 文件指纹
+
+打包输出的文件后缀。
+
+**hash** 和整个项目的构建相关，只要项目文件有修改，整个项目构建的hash值就会更改。
+**chunkhash** 和 webpack 打包的chunk有关，不同的entry会生成不同的chunkhash值。
+**contenthash** 根据文件内容来定义hash, 文件内容不变、则contenthash不变。
+
+
+```js
+...
+output: {
+  clean: true,
+  filename: '[name][chunkhash:6].js', // 使用chunkhash
+  path: path.join(__dirname, 'dist/js')
+},
+...
+```
+
+
+对于css，可以使用contenthash
+
+```bash
+pnpm add mini-css-extract-plugin -D
+```
+
+```js
+...
+```
+
+图片指纹设置
+
+| 占位符        | 含义                          |
+|---------------|-------------------------------|
+| [ext]         | 资源后缀名                    |
+| [name]        | 文件名称                      |
+| [path]        | 文件的相对路径                |
+| [folder]      | 文件所在的文件夹              |
+| [contenthash] | 文件的内容hash, 默认是md5生成 |
+| [hash]        | 文件的内容hash, 默认是md5生成 |
+| [emoji]       | 一个随机指代文件内容的emoji |
+
+

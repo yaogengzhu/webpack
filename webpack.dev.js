@@ -10,7 +10,7 @@ module.exports = {
   },
   output: {
     clean: true,
-    filename: '[name].js',
+    filename: '[name][chunkhash:6].js',
     path: path.join(__dirname, 'dist/js')
   },
   module: {
