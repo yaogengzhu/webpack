@@ -1,3 +1,10 @@
+前置知识！ 采用pnpm管理依赖. pnpm使用方式与npm基本一致
+
+安装
+```bash
+npm i -g pnpm 
+```
+
 # webpack
 
 ## loader
@@ -71,7 +78,8 @@ mod用来指定当前的构建环境：production、development、none
 | none        | 不开启任何优化项                                               |
 
 
-## 资源解析、解析es6
+## 处理文件
+### 资源解析、解析es6
 
 使用babel-loader
 
@@ -83,3 +91,42 @@ babler的配置文件是： .babelrc
 
 
 解析 jsx 语法
+
+
+### 解析css
+
+```bash
+pnpm add style-loader css-loader -D
+```
+
+配置
+```js
+ ...
+module: {
+    rules: [
+      ...
+      { test: /\.css$/, use: ['style-loader', 'css-loader'] }
+      ...
+    ],
+},
+...
+```
+
+处理less
+
+安装less-loader less
+
+```bash
+pnpm add less-loader less -D
+```
+
+同理写好配置
+```bash
+module: {
+    rules: [
+      ...
+      { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] }
+      ...
+    ],
+},
+```
