@@ -69,3 +69,17 @@ mod用来指定当前的构建环境：production、development、none
 | development | 设置 process.env.NODE_ENV 的值为`development`                  |
 | production  | 设置 process.env.NODE_ENV 的值为`production`、开启部分插件使用 |
 | none        | 不开启任何优化项                                               |
+
+
+## 资源解析、解析es6
+
+使用babel-loader
+
+babler的配置文件是： .babelrc
+
+```bash
+@babel/core @babel/preset-env babel-loader
+```
+
+
+解析 jsx 语法

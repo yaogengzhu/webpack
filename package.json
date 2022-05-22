@@ -4,16 +4,22 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "webpack": "webpack"
+        "build": "webpack"
     },
     "keywords": [],
     "author": "yaogengzhu",
     "license": "ISC",
     "dependencies": {
         "raw-loader": "^4.0.2",
+        "react": "^18.1.0",
+        "react-dom": "^18.1.0",
         "webpack": "^5.72.1"
     },
     "devDependencies": {
+        "@babel/core": "^7.18.0",
+        "@babel/preset-env": "^7.18.0",
+        "@babel/preset-react": "^7.17.12",
+        "babel-loader": "^8.2.5",
         "webpack-cli": "^4.9.2"
     }
 }
