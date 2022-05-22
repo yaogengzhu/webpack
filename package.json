@@ -10,7 +10,6 @@
     "author": "yaogengzhu",
     "license": "ISC",
     "dependencies": {
-        "raw-loader": "^4.0.2",
         "react": "^18.1.0",
         "react-dom": "^18.1.0",
         "webpack": "^5.72.1"
@@ -21,9 +20,12 @@
         "@babel/preset-react": "^7.17.12",
         "babel-loader": "^8.2.5",
         "css-loader": "^6.7.1",
+        "file-loader": "^6.2.0",
         "less": "^4.1.2",
         "less-loader": "^11.0.0",
+        "raw-loader": "^4.0.2",
         "style-loader": "^3.3.1",
+        "url-loader": "^4.1.1",
         "webpack-cli": "^4.9.2"
     }
 }

@@ -130,3 +130,43 @@ module: {
     ],
 },
 ```
+
+### 解析图片和解析字体资源
+
+```bash
+pnpm add file-loader
+```
+
+使用配置
+
+```js
+module: {
+    rules: [
+      ...
+      { test: /\.(png|jpg|gif|jpeg|svg)$/, use: 'file-loader' },
+      { test: /\.(woff|woff2|eot|ttf|otf)$/, use: 'file-loader' },
+      ...
+    ],
+},
+```
+
+使用url-loader
+
+```bash
+pnpm add url-loader -D
+```
+
+对于小的图片，可以base64处理
+```bash
+{
+  test: /\.(png|jpg|gif|jpeg|svg)$/,
+  use: [
+    {
+      loader: 'url-loader',
+      options: {
+        limit: 20280, // 20k, 小于20k 自动base64
+      }
+    }
+  ]
+},
+```
