@@ -1,7 +1,9 @@
 const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
-  mode: 'production',
+  // mode: 'production',
+  mode: 'development',
   entry: {
     index: './src/index.js',
     search: './src/search.js'
@@ -31,4 +33,13 @@ module.exports = {
       { test: /\.(woff|woff2|eot|ttf|otf)$/, use: 'file-loader' },
     ],
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'public'), // webpack5.x 静态文件文章
+    },
+    hot: true,
+  }
 }
