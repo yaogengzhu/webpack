@@ -278,6 +278,60 @@ pnpm add mini-css-extract-plugin -D
 | [folder]      | 文件所在的文件夹              |
 | [contenthash] | 文件的内容hash, 默认是md5生成 |
 | [hash]        | 文件的内容hash, 默认是md5生成 |
-| [emoji]       | 一个随机指代文件内容的emoji |
+| [emoji]       | 一个随机指代文件内容的emoji   |
 
 
+### 代码压缩
+
+- HTML 压缩
+- CSS  压缩
+- JS 压缩
+
+**js 文件的压缩**
+
+内置了 `uglifyjs-webpack-plugin`
+
+**css 文件压缩**
+
+/ v4版本使用
+
+使用 `optimize-css-assets-webpack-plugin`
+
+```bash
+pnpm add optimize-css-assets-webpack-plugin -D
+```
+
+同时使用cssnano (css预处理器)
+
+```bash
+pnpm add cssnano -D
+```
+
+对于当前版本的v5而言
+
+使用 如下方式
+```bash
+pnpm add -D css-minimizer-webpack-plugin
+```
+
+**html 文件压缩**
+
+```bash
+pnpm add html-webpack-plugin -D
+```
+
+```js
+new HtmlWebpackPlugin({
+  template: path.join(__dirname, './public/index.html'),
+  filename: 'index.html',
+  chunks: ['index'],
+  inject: true,
+  minify: {
+    html5: true,
+    collapseWhitespace: true,
+    preserveLineBreaks: false,
+    minifyCSS: true,
+    removeComments: true,
+  }
+})
+```

@@ -1,6 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'production',
@@ -50,6 +52,34 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name][contenthash:6].css'
+    }),
+    new CssMinimizerPlugin(),
+    // 多页面打包，就复制多个htmlWebpackPlugin
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, './public/index.html'),
+      filename: 'index.html',
+      chunks: ['index'],
+      inject: true,
+      minify: {
+        html5: true,
+        collapseWhitespace: true,
+        preserveLineBreaks: false,
+        minifyCSS: true,
+        removeComments: true,
+      }
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, './public/index.html'),
+      filename: 'search.html',
+      chunks: ['search'],
+      inject: true,
+      minify: {
+        html5: true,
+        collapseWhitespace: true,
+        preserveLineBreaks: false,
+        minifyCSS: true,
+        removeComments: true,
+      }
     })
-  ]
+  ],
 }
