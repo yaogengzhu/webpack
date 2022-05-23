@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const autoprefixer = require('autoprefixer')
 
 module.exports = {
   mode: 'production',
@@ -27,7 +28,26 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'less-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [autoprefixer({
+                  overrideBrowserslist: [
+                    'last 10 Chrome versions',
+                    'last 5 Firefox versions',
+                    'Safari >= 6',
+                    'ie> 8'
+                  ]
+                })]
+              }
+            }
+          }
+        ]
       },
       {
         test: /\.(png|jpg|gif|jpeg|svg)$/,

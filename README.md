@@ -335,3 +335,77 @@ new HtmlWebpackPlugin({
   }
 })
 ```
+
+### 对于目录清理
+
+对于webpack5.X 而言
+
+```js
+output: {
+  ...
+  clean: true, // 清空构建目录
+  ...
+},
+```
+
+### css增强功能、css3前缀处理
+
+浏览器内核
+- trident(-ms)
+- Geko(-moz)
+- Webkit(-webkit)
+- Presto(-o)
+
+autoprefixer 插件 自动补全CSS3前缀 & postcss-loader
+
+针对webpack4.x
+```bash
+pnpm add postcss-loader autoprefixer -D
+```
+
+```js
+{
+  test: /\.less$/,
+  use: [
+    MiniCssExtractPlugin.loader,
+    'css-loader',
+    'less-loader',
+    {
+      loader: 'postcss-loader',
+      options: {
+        plugins: () => [
+          require('autoprefixer')({
+            browsers: ['last 2 versions', '>1%', 'ios 7']
+          })
+        ]
+      }
+    }
+  ]
+},
+```
+
+针对webpack5.X
+
+[可参考该文章](https://blog.csdn.net/huangbiao86/article/details/123133779)
+
+```bash
+pnpm add -D postcss-loader postcss
+```
+
+```js
+{
+  loader: 'postcss-loader',
+  options: {
+    postcssOptions: {
+      plugins: [autoprefixer({
+        overrideBrowserslist: [
+          'last 10 Chrome versions',
+          'last 5 Firefox versions',
+          'Safari >= 6',
+          'ie> 8'
+        ]
+      })]
+    }
+  }
+}
+```
