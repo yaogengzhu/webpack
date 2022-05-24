@@ -466,3 +466,53 @@ raw-loader 内联 html
 方案1： 借助 style-loader
 
 方案2: html-inline-css-webpack-plugin
+
+
+### 多页面应用打包
+
+每一个页面对应一个entry, 一个html-webpack-plugin 
+
+缺点：每次新增或删除页面都需要改webpack 配置
+
+动态获取 entry 和 设置 html-webpack-plugin 数量
+
+利用glob.sync 
+
+```js
+entry: glob.sync(Path.join(__dirname, './src/*/index.js'))
+```
+
+如何配置
+```js
+...
+const glob = require('glob')
+const setMAP = () => {
+  const entry = {}
+  const htmlWebpackPlugin = []
+  const entryFiles = glob.sync(path.join(__dirname, './src/*/index.js'))
+  Object.keys(entryFiles).forEach((index) => {
+    const entryFile = entryFiles[index]
+    const match = entryFile.match(/src\/(.*)\/index\.js/)
+    const pageName = match && match[1]
+    entry[pageName] = entryFile
+    htmlWebpackPlugin.push(new HtmlWebpackPlugin({
+      template: path.join(__dirname, `src/${pageName}/index.html`),
+      filename: `${pageName}.html`,
+      chunks: [pageName],
+      inject: true,
+      minify: {
+        html5: true,
+        collapseWhitespace: true,
+        preserveLineBreaks: false,
+        minifyCSS: true,
+        removeComments: true,
+      }
+    }))
+  })
+  return {
+    entry,
+    htmlWebpackPlugin
+  }
+}
+...
+```

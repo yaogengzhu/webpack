@@ -1,16 +1,45 @@
 const path = require('path')
+const glob = require('glob')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 
+const setMAP = () => {
+  const entry = {}
+  const htmlWebpackPlugin = []
+  const entryFiles = glob.sync(path.join(__dirname, './src/*/index.js'))
+  Object.keys(entryFiles).forEach((index) => {
+    const entryFile = entryFiles[index]
+    const match = entryFile.match(/src\/(.*)\/index\.js/)
+    const pageName = match && match[1]
+    entry[pageName] = entryFile
+    htmlWebpackPlugin.push(new HtmlWebpackPlugin({
+      template: path.join(__dirname, `src/${pageName}/index.html`),
+      filename: `${pageName}.html`,
+      chunks: [pageName],
+      inject: true,
+      minify: {
+        html5: true,
+        collapseWhitespace: true,
+        preserveLineBreaks: false,
+        minifyCSS: true,
+        removeComments: true,
+      }
+    }))
+  })
+  return {
+    entry,
+    htmlWebpackPlugin
+  }
+}
+
+const { entry, htmlWebpackPlugin } = setMAP()
+
 module.exports = {
   mode: 'production',
-  entry: {
-    index: './src/index.js',
-    search: './src/search.js'
-  },
+  entry,
   output: {
     clean: true,
     filename: '[name]_[chunkhash:6].js', // chunkhash
@@ -82,31 +111,6 @@ module.exports = {
     }),
     new CssMinimizerPlugin(),
     // 多页面打包，就复制多个htmlWebpackPlugin
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, './public/index.html'),
-      filename: 'index.html',
-      chunks: ['index'],
-      inject: true,
-      minify: {
-        html5: true,
-        collapseWhitespace: true,
-        preserveLineBreaks: false,
-        minifyCSS: true,
-        removeComments: true,
-      }
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, './public/index.html'),
-      filename: 'search.html',
-      chunks: ['search'],
-      inject: true,
-      minify: {
-        html5: true,
-        collapseWhitespace: true,
-        preserveLineBreaks: false,
-        minifyCSS: true,
-        removeComments: true,
-      }
-    })
-  ],
+    
+  ].concat(htmlWebpackPlugin),
 }
