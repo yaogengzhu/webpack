@@ -16,7 +16,7 @@ specifiers:
   mini-css-extract-plugin: ^2.6.0
   postcss-loader: ^7.0.0
   px2rem-loader: ^0.1.9
-  raw-loader: ^4.0.2
+  raw-loader: 0.5.1
   react: ^18.1.0
   react-dom: ^18.1.0
   style-loader: ^3.3.1
@@ -46,7 +46,7 @@ devDependencies:
   mini-css-extract-plugin: 2.6.0_webpack@5.72.1
   postcss-loader: 7.0.0_webpack@5.72.1
   px2rem-loader: 0.1.9
-  raw-loader: 4.0.2_webpack@5.72.1
+  raw-loader: 0.5.1
   style-loader: 3.3.1_webpack@5.72.1
   url-loader: 4.1.1_4spiask3fd7dtsm35bmnngyscq
   webpack-cli: 4.9.2_cwh63z5eu3fmemh7flfnfpcp74
@@ -3995,15 +3995,8 @@ packages:
       unpipe: 1.0.0
     dev: true
 
-  /raw-loader/4.0.2_webpack@5.72.1:
-    resolution: {integrity: sha512-ZnScIV3ag9A4wPX/ZayxL/jZH+euYb6FcUinPcgiQW0+UBtEv0O6Q3lGd3cqJ+GHH+rksEv3Pj99oxJ3u3VIKA==}
-    engines: {node: '>= 10.13.0'}
-    peerDependencies:
-      webpack: ^4.0.0 || ^5.0.0
-    dependencies:
-      loader-utils: 2.0.2
-      schema-utils: 3.1.1
-      webpack: 5.72.1_webpack-cli@4.9.2
+  /raw-loader/0.5.1:
+    resolution: {integrity: sha512-sf7oGoLuaYAScB4VGr0tzetsYlS8EJH6qnTCfQ/WVEa89hALQ4RQfCKt5xCyPQKPDUbVUAIP1QsxAwfAjlDp7Q==}
     dev: true
 
   /react-dom/18.1.0_react@18.1.0:

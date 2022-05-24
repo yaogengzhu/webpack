@@ -436,3 +436,33 @@ pnpm add px2rem-loader -D
 ```bash
 pnpm add lib-flexible -S
 ```
+
+### 资源内联的意义
+
+代码层面：
+- 页面框架的初始化脚本
+- 上报相关打点
+- css 内联避免页面闪动
+
+请求层面： 减少HTTP 网络请求数
+- 小图片或者字体内联(url-loader)
+
+raw-loader 内联 html
+
+```js
+<script><%{require('raw-loader!babel-loader!./meta.html!')%></script>
+```
+
+```html
+<head>
+    <%=require('raw-loader!. /meta.html')%>
+    <title>Document</title>
+    <script><%=require('raw-loader!babel-loader!../node_modules/lib-flexible/flexible') %></script>
+</head>
+```
+
+**css内联**
+
+方案1： 借助 style-loader
+
+方案2: html-inline-css-webpack-plugin
