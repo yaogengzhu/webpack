@@ -409,3 +409,30 @@ pnpm add -D postcss-loader postcss
   }
 }
 ```
+
+### 浏览器的分辨率
+
+页面适配 rem 
+
+rem是什么？
+W3C 对rem 的定义： font-size of the root element
+
+rem 和 px 的对比
+- rem 是相对单位
+- px 是绝对单位
+
+移动端CSS px 自动转成rem
+
+使用 px2rem-loader
+
+```bash
+pnpm add px2rem-loader -D
+```
+
+页面渲染时计算根元素的font-size 值
+
+可使用手淘的lib-flexible库
+
+```bash
+pnpm add lib-flexible -S
+```

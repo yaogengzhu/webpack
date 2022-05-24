@@ -46,6 +46,13 @@ module.exports = {
                 })]
               }
             }
+          },
+          {
+            loader: 'px2rem-loader',
+            options: {
+              remUnit: 75,
+              remPrecesion: 8, // 小数点位数
+            }
           }
         ]
       },

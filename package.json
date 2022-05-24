@@ -12,6 +12,7 @@
     "author": "yaogengzhu",
     "license": "ISC",
     "dependencies": {
+        "lib-flexible": "^0.3.2",
         "react": "^18.1.0",
         "react-dom": "^18.1.0",
         "webpack": "^5.72.1"
@@ -30,6 +31,7 @@
         "less-loader": "^11.0.0",
         "mini-css-extract-plugin": "^2.6.0",
         "postcss-loader": "^7.0.0",
+        "px2rem-loader": "^0.1.9",
         "raw-loader": "^4.0.2",
         "style-loader": "^3.3.1",
         "url-loader": "^4.1.1",
