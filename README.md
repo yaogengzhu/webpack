@@ -516,3 +516,21 @@ const setMAP = () => {
 }
 ...
 ```
+
+### 使用source map
+
+作用：通过sorce map 定位到源码
+
+开发环境开启，线上环境关闭
+
+线上排查问题时候可以将source map 上传到错误监控系统
+
+| 关键字     | 描述                                       |
+|------------|--------------------------------------------|
+| eval       | 使用eval包裹模块代码                       |
+| source map | 产生.map文件                               |
+| cheap      | 不包含列信息                               |
+| inline     | 将.map 作为dataURL 嵌入，不单独.map 文件｜ |
+| module     | 包含loader 的source map                    |
+
+通过组合、可以看到 源码、行

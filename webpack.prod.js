@@ -38,7 +38,7 @@ const setMAP = () => {
 const { entry, htmlWebpackPlugin } = setMAP()
 
 module.exports = {
-  mode: 'production',
+  mode: 'none',
   entry,
   output: {
     clean: true,
@@ -113,4 +113,5 @@ module.exports = {
     // 多页面打包，就复制多个htmlWebpackPlugin
     
   ].concat(htmlWebpackPlugin),
+  devtool: 'inline-source-map', // eval source-map inline-source-map
 }
