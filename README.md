@@ -534,3 +534,75 @@ const setMAP = () => {
 | module     | 包含loader 的source map                    |
 
 通过组合、可以看到 源码、行
+
+
+### 如何提取公共资源
+
+基础库分离
+
+思路：将 react 、react-dom 基础包通过cdn引入、不打入 bundle中
+
+使用 html-webpack-externals-plugins
+
+
+可以利用 SplitChunksPlugin 进行公共脚本分离
+
+chunks 参数说明
+- async 异步引入的库进行分离 （default）
+- initial 同步引入的库进行分离
+- all 所有的库进行分离
+
+```js
+optimization: {
+  splitChunks: {
+    chunks: 'all',
+    minSize: 20000, // 最小包体积
+    minRemainingSize: 0,
+    minChunks: 1,
+    maxAsyncRequests: 30,
+    maxInitialRequests: 30,
+    enforceSizeThreshold: 50000,
+    cacheGroups: {
+      commons: {
+        test: /(react|react-dom)/,
+        name: 'venders',
+        chunks: 'all'
+      },
+      defaultVendors: {
+        test: /[\\/]node_modules[\\/]/,
+        priority: -10,
+        reuseExistingChunk: true,
+      },
+      default: {
+        minChunks: 2,
+        priority: -20,
+        reuseExistingChunk: true,
+      },
+    },
+  },
+}
+```
+
+
+```bash
+pnpm add html-webpack-externals-plugin -D 
+```
+
+```js
+...
+new HtmlWebpackExternalsPlugin({
+  externals: [
+    {
+      module: 'react',
+      entry: 'https://unpkg.com/react@18/umd/react.production.min.js',
+      global: 'React'
+    },
+    {
+      module: 'react-dom',
+      entry: 'https://unpkg.com/react-dom@18/umd/react-dom.production.min.js',
+      global: 'ReactDOM'
+    }
+  ]
+})
+...
+```

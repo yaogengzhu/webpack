@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const autoprefixer = require('autoprefixer')
+const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
 
 const setMAP = () => {
   const entry = {}
@@ -18,7 +19,7 @@ const setMAP = () => {
     htmlWebpackPlugin.push(new HtmlWebpackPlugin({
       template: path.join(__dirname, `src/${pageName}/index.html`),
       filename: `${pageName}.html`,
-      chunks: [pageName],
+      chunks: ['venders', pageName], // 需要引入venders
       inject: true,
       minify: {
         html5: true,
@@ -38,7 +39,8 @@ const setMAP = () => {
 const { entry, htmlWebpackPlugin } = setMAP()
 
 module.exports = {
-  mode: 'none',
+  // mode: 'none',
+  mode: 'production',
   entry,
   output: {
     clean: true,
@@ -110,8 +112,49 @@ module.exports = {
       filename: '[name][contenthash:6].css'
     }),
     new CssMinimizerPlugin(),
+    // new HtmlWebpackExternalsPlugin({
+    //   externals: [
+    //     {
+    //       module: 'react',
+    //       entry: 'https://unpkg.com/react@18/umd/react.production.min.js',
+    //       global: 'React'
+    //     },
+    //     {
+    //       module: 'react-dom',
+    //       entry: 'https://unpkg.com/react-dom@18/umd/react-dom.production.min.js',
+    //       global: 'ReactDOM'
+    //     }
+    //   ]
+    // })
     // 多页面打包，就复制多个htmlWebpackPlugin
-    
   ].concat(htmlWebpackPlugin),
-  devtool: 'inline-source-map', // eval source-map inline-source-map
+  // devtool: 'inline-source-map', // eval source-map inline-source-map
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 20000, // 最小包体积
+      minRemainingSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        commons: {
+          test: /(react|react-dom)/,
+          name: 'venders',
+          chunks: 'all'
+        },
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  }
 }
