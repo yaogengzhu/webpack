@@ -39,8 +39,8 @@ const setMAP = () => {
 const { entry, htmlWebpackPlugin } = setMAP()
 
 module.exports = {
-  mode: 'none',
-  // mode: 'production',
+  // mode: 'none',
+  mode: 'production',
   entry,
   output: {
     clean: true,

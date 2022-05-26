@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@babel/core': ^7.18.0
+  '@babel/plugin-syntax-dynamic-import': ^7.8.3
   '@babel/preset-env': ^7.18.0
   '@babel/preset-react': ^7.17.12
   autoprefixer: ^10.4.7
@@ -35,6 +36,7 @@ dependencies:
 
 devDependencies:
   '@babel/core': 7.18.0
+  '@babel/plugin-syntax-dynamic-import': 7.8.3_@babel+core@7.18.0
   '@babel/preset-env': 7.18.0_@babel+core@7.18.0
   '@babel/preset-react': 7.17.12_@babel+core@7.18.0
   autoprefixer: 10.4.7

@@ -639,3 +639,32 @@ webpack 默认支持
 对比：通过scope hoisting 可以减少函数声明代码和内存开销。
 
 webpack mode -> production 默认开启
+
+
+### 代码分割和动态import
+
+代码分割的意义
+对于大的web 应用来讲，将所有的代码都放在一个文件中显然不够有效，特别是当你的某些代码块是在某些特殊的时候才被使用到。webpack有一个功能就是将你的代码分割成chunks ，当代码运行需要它们的时候在进行加载。
+
+适用的场景：
+- 抽离相同代码一个共享块
+- 脚本懒加载，使得初始值下载的代码更小
+
+懒加载JS脚本的方式
+- CommonJs: require.ensure
+- es6： 动态import (目前没有原生支持，需要babel支持)
+
+如何使用动态的import?
+
+安装插件
+```bash
+pnpm add @babel/plugin-syntax-dynamic-import -S -D
+```
+
+```js
+[
+  ...
+  plugins: ['@babel/plugin-syntax-dynamic-import']
+  ...
+]
+```
