@@ -1,17 +1,17 @@
-const path = require('path')
-const glob = require('glob')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+const glob = require('glob');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const setMAP = () => {
-  const entry = {}
-  const htmlWebpackPlugin = []
-  const entryFiles = glob.sync(path.join(__dirname, './src/*/index.js'))
+  const entry = {};
+  const htmlWebpackPlugin = [];
+  const entryFiles = glob.sync(path.join(__dirname, './src/*/index.js'));
   Object.keys(entryFiles).forEach((index) => {
-    const entryFile = entryFiles[index]
-    const match = entryFile.match(/src\/(.*)\/index\.js/)
-    const pageName = match && match[1]
-    entry[pageName] = entryFile
+    const entryFile = entryFiles[index];
+    const match = entryFile.match(/src\/(.*)\/index\.js/);
+    const pageName = match && match[1];
+    entry[pageName] = entryFile;
     htmlWebpackPlugin.push(new HtmlWebpackPlugin({
       template: path.join(__dirname, `src/${pageName}/index.html`),
       filename: `${pageName}.html`,
@@ -23,16 +23,16 @@ const setMAP = () => {
         preserveLineBreaks: false,
         minifyCSS: true,
         removeComments: true,
-      }
-    }))
-  })
+      },
+    }));
+  });
   return {
     entry,
-    htmlWebpackPlugin
-  }
-}
+    htmlWebpackPlugin,
+  };
+};
 
-const { entry, htmlWebpackPlugin } = setMAP()
+const { entry, htmlWebpackPlugin } = setMAP();
 
 module.exports = {
   // mode: 'production',
@@ -41,7 +41,7 @@ module.exports = {
   output: {
     clean: true,
     filename: '[name][chunkhash:6].js',
-    path: path.join(__dirname, 'dist/js')
+    path: path.join(__dirname, 'dist/js'),
   },
   module: {
     rules: [
@@ -56,15 +56,15 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 20280, // 20k, 小于20k 自动base64
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       { test: /\.(woff|woff2|eot|ttf|otf)$/, use: 'file-loader' },
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ].concat(htmlWebpackPlugin),
   devServer: {
     static: {
@@ -72,5 +72,5 @@ module.exports = {
     },
     hot: true,
   },
-  devtool: 'source-map', // 开发环境使用 source-map 
-}
+  devtool: 'source-map', // 开发环境使用 source-map
+};
