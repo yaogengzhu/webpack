@@ -39,8 +39,8 @@ const setMAP = () => {
 const { entry, htmlWebpackPlugin } = setMAP()
 
 module.exports = {
-  // mode: 'none',
-  mode: 'production',
+  mode: 'none',
+  // mode: 'production',
   entry,
   output: {
     clean: true,
@@ -112,6 +112,7 @@ module.exports = {
       filename: '[name][contenthash:6].css'
     }),
     new CssMinimizerPlugin(),
+    // new webpack.optimize.ModuleConcatenationPlugin(), // mode --> production 默认开启
     // new HtmlWebpackExternalsPlugin({
     //   externals: [
     //     {
