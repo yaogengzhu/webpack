@@ -668,3 +668,43 @@ pnpm add @babel/plugin-syntax-dynamic-import -S -D
   ...
 ]
 ```
+
+### webpack 和 eslint的结合 
+
+Eslint 必要性， 代码规范检查
+Airbnb： eslint-config-airbnb 、 eslint-config-airbnb-base
+腾讯： eslit-config-alloy
+
+制定团队Eslint 规范
+
+- 不重复造轮子，基于eslint:recommend 配置并改进
+- 能帮助发现代码错误、全部开启。
+- 帮助保持团队的代码风格统一、而不是限制开发体验。
+
+Eslint 如何执行落地
+- 和CI/CD 系统集成
+  bulid 之前增加lint-pipline
+
+- 和 webpack 集成
+
+**本地开发阶段增加precommit 钩子**
+
+[可以参考](https://github.com/yaogengzhu/daily-share/issues/161)
+
+集成webpack
+
+```bash
+pnpm add eslint eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-ally -D
+```
+
+```bash
+pnpm add eslint-loader -D
+```
+
+```bash
+# pnpm add babel-eslint -D
+# 更新
+pnpm add @babel/eslint-parser - D
+
+pnpm add eslint-config-airbnb -D
+```
