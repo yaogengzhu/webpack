@@ -6,10 +6,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const setMAP = () => {
   const entry = {};
   const htmlWebpackPlugin = [];
-  const entryFiles = glob.sync(path.join(__dirname, './src/*/index.js'));
+  const entryFiles = glob.sync(path.join(__dirname, './src/*/index.jsx'));
   Object.keys(entryFiles).forEach((index) => {
     const entryFile = entryFiles[index];
-    const match = entryFile.match(/src\/(.*)\/index\.js/);
+    const match = entryFile.match(/src\/(.*)\/index\.jsx/);
     const pageName = match && match[1];
     entry[pageName] = entryFile;
     htmlWebpackPlugin.push(new HtmlWebpackPlugin({
@@ -43,10 +43,13 @@ module.exports = {
     filename: '[name][chunkhash:6].js',
     path: path.join(__dirname, 'dist/js'),
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [
       { test: /\.txt$/, use: 'raw-loader' },
-      { test: /\.js$/, use: 'babel-loader' },
+      { test: /\.(js|jsx)$/, use: 'babel-loader' },
       { test: /\.css$/, use: ['style-loader', 'css-loader'] },
       { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] },
       {

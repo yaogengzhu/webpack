@@ -744,3 +744,34 @@ module.exports = {
   }
 }
 ```
+
+### 实现 SSR 打包
+
+服务端渲染SSR是什么？
+
+渲染： HTML + CSS + JS + Data -> 渲染后的HTML
+
+服务端： 
+- 所有的模块等资源存储在服务端
+- 内网机器拉取数据更快
+- 一个HTML返回所有的数据
+
+交互流程
+
+请求开始 -> Server -> {
+   Html   -> server render -> 浏览器解析并渲染 -> 加载其他js
+   data
+}
+
+SSR 的优势
+- 减少白屏时间
+- 对于SEO友好
+
+渲染思路
+
+服务端
+- 使用 react-dom/server 的renderToString 方法将React 组件渲染成字符串
+- 服务端路由返回对应的模版
+
+客户端
+- 打包针对服务端的组件

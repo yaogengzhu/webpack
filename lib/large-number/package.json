@@ -1,6 +1,6 @@
 {
     "name": "large-js-number",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "大整数打包",
     "main": "index.js",
     "scripts": {

@@ -1,0 +1,23 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 info pnpm": {
+    "err": {
+      "name": "Error",
+      "message": "not found: buid:ssr",
+      "code": "ENOENT",
+      "stack": "Error: not found: buid:ssr\n    at getNotFoundError (/Users/yaogengzhu/.nvm/versions/node/v16.14.0/lib/node_modules/pnpm/dist/pnpm.cjs:41677:51)\n    at Function.whichSync [as sync] (/Users/yaogengzhu/.nvm/versions/node/v16.14.0/lib/node_modules/pnpm/dist/pnpm.cjs:41754:13)\n    at getCommandAbsolutePathSync (/Users/yaogengzhu/.nvm/versions/node/v16.14.0/lib/node_modules/pnpm/dist/pnpm.cjs:43319:44)\n    at default_1 (/Users/yaogengzhu/.nvm/versions/node/v16.14.0/lib/node_modules/pnpm/dist/pnpm.cjs:43328:32)\n    at /Users/yaogengzhu/.nvm/versions/node/v16.14.0/lib/node_modules/pnpm/dist/pnpm.cjs:172151:39"
+    }
+  },
+  "2 error pnpm": {
+    "code": "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL",
+    "prefix": "/Users/yaogengzhu/Documents/openProject/webpack",
+    "err": {
+      "name": "pnpm",
+      "message": "not found: buid:ssr",
+      "code": "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL",
+      "stack": "Error: not found: buid:ssr\n    at getNotFoundError (/Users/yaogengzhu/.nvm/versions/node/v16.14.0/lib/node_modules/pnpm/dist/pnpm.cjs:41677:51)\n    at Function.whichSync [as sync] (/Users/yaogengzhu/.nvm/versions/node/v16.14.0/lib/node_modules/pnpm/dist/pnpm.cjs:41754:13)\n    at getCommandAbsolutePathSync (/Users/yaogengzhu/.nvm/versions/node/v16.14.0/lib/node_modules/pnpm/dist/pnpm.cjs:43319:44)\n    at default_1 (/Users/yaogengzhu/.nvm/versions/node/v16.14.0/lib/node_modules/pnpm/dist/pnpm.cjs:43328:32)\n    at /Users/yaogengzhu/.nvm/versions/node/v16.14.0/lib/node_modules/pnpm/dist/pnpm.cjs:172151:39"
+    }
+  }
+}

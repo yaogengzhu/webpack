@@ -10,27 +10,29 @@ const autoprefixer = require('autoprefixer');
 const setMAP = () => {
   const entry = {};
   const htmlWebpackPlugin = [];
-  const entryFiles = glob.sync(path.join(__dirname, './src/*/index.jsx'));
+  const entryFiles = glob.sync(path.join(__dirname, './src/*/index-server.jsx'));
   Object.keys(entryFiles).forEach((index) => {
     const entryFile = entryFiles[index];
-    const match = entryFile.match(/src\/(.*)\/index\.jsx/);
+    const match = entryFile.match(/src\/(.*)\/index-server\.jsx/);
     const pageName = match && match[1];
-    entry[pageName] = entryFile;
-    htmlWebpackPlugin.push(
-      new HtmlWebpackPlugin({
-        template: path.join(__dirname, `src/${pageName}/index.html`),
-        filename: `${pageName}.html`,
-        chunks: ['venders', pageName], // 需要引入venders
-        inject: true,
-        minify: {
-          html5: true,
-          collapseWhitespace: true,
-          preserveLineBreaks: false,
-          minifyCSS: true,
-          removeComments: true,
-        },
-      }),
-    );
+    if (pageName) {
+      entry[pageName] = entryFile;
+      htmlWebpackPlugin.push(
+        new HtmlWebpackPlugin({
+          template: path.join(__dirname, `src/${pageName}/index.html`),
+          filename: `${pageName}.html`,
+          chunks: ['venders', pageName], // 需要引入venders
+          inject: true,
+          minify: {
+            html5: true,
+            collapseWhitespace: true,
+            preserveLineBreaks: false,
+            minifyCSS: true,
+            removeComments: true,
+          },
+        }),
+      );
+    }
   });
   return {
     entry,
@@ -45,8 +47,9 @@ module.exports = {
   entry,
   output: {
     clean: true,
-    filename: '[name]_[chunkhash:6].js', // chunkhash
+    filename: '[name]-server.js', // chunkhash
     path: path.join(__dirname, 'dist/js'),
+    libraryTarget: 'umd',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.less'],
