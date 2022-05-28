@@ -125,6 +125,14 @@ module.exports = {
     }),
     new CssMinimizerPlugin(),
     new FriendlyErrorsWebpackPlugin(),
+    function () {
+      this.hooks.done.tap('done', (stats) => {
+        if (stats.compilation.errors) {
+          console.log('??');
+          // console.log(stats);
+        }
+      });
+    },
     // new webpack.optimize.ModuleConcatenationPlugin(), // mode --> production 默认开启
     // new HtmlWebpackExternalsPlugin({
     //   externals: [

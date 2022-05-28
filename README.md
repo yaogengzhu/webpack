@@ -786,3 +786,17 @@ SSR 的优势
 ```
 pnpm add friendly-errors-webpack-plugin
 ```
+
+### 构建异常和中断处理
+
+在CI/CD 的pipline 或者 发布系统需要知道当前构建状态
+
+每次构建完成后输入 echo$ 获取错误码
+
+如何主动捕获并处理构建错误？
+
+compiler 每次构建接受后会触发done 这个hook
+
+process.exit 主动处理构建报错！
+
+
