@@ -799,4 +799,49 @@ compiler 每次构建接受后会触发done 这个hook
 
 process.exit 主动处理构建报错！
 
+### 构建配置包设计
 
+构建配置抽离成npm 包的意义
+
+通用性
+
+- 业务开发者无需关注构建配置
+- 统一团队构建脚本
+
+可维护性
+- 构建配置合理拆分
+- README文档、ChangeLog 文档等
+
+质量
+- 冒烟测试、单元测试、测试覆盖率
+- 持续集成
+
+设计
+通过多个配置文件管理不同环境的webpack配置
+
+- 基础配置：webpack.base.js
+- 开发环境：webpack.dev.js
+- 生产环境：webpack.prod.js
+- SSR 环境：webpack.ssr.js
+
+抽离一个npm包统一管理
+- 规范：Git commit 日志、README、ESlint规范、Semver 规范
+- 质量： 冒烟测试、单元测试、测试覆盖率 和 CI
+
+使用Eslint 规范构建脚本
+
+```bash
+pnpm add eslint-config-airbnb-base -D
+```
+
+eslint --fix 自动修复
+
+### 冒烟测试执行
+
+构建是否成功
+
+- 每次构建完成 build 目录是否有内容输出
+- 是否有 js、css 等 静态资源文件
+- 是否有html 文件
+
+判断构建是否成功
