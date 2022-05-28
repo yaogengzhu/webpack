@@ -10,9 +10,9 @@ const OtherComponent = React.lazy(() => import('./text'));
 function App() {
   return (
     <div className="search">
-      中文字体-测试
+      中文字体-测试xx
       <img src={logo} alt="" />
-      <button type="button">按钮</button>
+      <button type="button">按钮12</button>
       <OtherComponent />
     </div>
   );

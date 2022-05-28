@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 // const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 
 const setMAP = () => {
@@ -42,6 +43,7 @@ const { entry, htmlWebpackPlugin } = setMAP();
 module.exports = {
   // mode: 'none',
   mode: 'production',
+  stats: 'errors-only', // 发生错误时，才打印日志
   entry,
   output: {
     clean: true,
@@ -122,6 +124,7 @@ module.exports = {
       filename: '[name][contenthash:6].css',
     }),
     new CssMinimizerPlugin(),
+    new FriendlyErrorsWebpackPlugin(),
     // new webpack.optimize.ModuleConcatenationPlugin(), // mode --> production 默认开启
     // new HtmlWebpackExternalsPlugin({
     //   externals: [

@@ -2,6 +2,7 @@ const path = require('path');
 const glob = require('glob');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 const setMAP = () => {
   const entry = {};
@@ -37,6 +38,7 @@ const { entry, htmlWebpackPlugin } = setMAP();
 module.exports = {
   // mode: 'production',
   mode: 'development',
+  stats: 'minimal',
   entry,
   output: {
     clean: true,
@@ -68,6 +70,7 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new FriendlyErrorsWebpackPlugin(),
   ].concat(htmlWebpackPlugin),
   devServer: {
     static: {

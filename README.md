@@ -775,3 +775,14 @@ SSR 的优势
 
 客户端
 - 打包针对服务端的组件
+
+
+### 当前构建的日志显示
+
+统计信息 Stats 
+
+借助插件
+
+```
+pnpm add friendly-errors-webpack-plugin
+```
