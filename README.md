@@ -708,3 +708,39 @@ pnpm add @babel/eslint-parser - D
 
 pnpm add eslint-config-airbnb -D
 ```
+
+### webpack 打包库和组件
+
+- 除了用来打包应用，也可以用来打包Js库
+
+实现一个大整数加法库的打包
+
+- 需要打包一个压缩版本和非压缩版本
+- 支持AMD/CJS/ESM 模块引入
+
+
+```js
+const TerserPlugin = require("terser-webpack-plugin")
+
+module.exports = {
+  mode: 'none',
+  entry: {
+    'large-number': './src/index.js',
+    'large-numbr.min': './src/index.js'
+  },
+  output: {
+    filename: '[name].js',
+    library: 'largeNumber',
+    libraryTarget: 'umd',
+    libraryExport: 'default',
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        include: /\.min\.js$/,
+      }),
+    ]
+  }
+}
+```
