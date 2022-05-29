@@ -857,3 +857,15 @@ eslint --fix 自动修复
 - 升级大版本：  npm version major
 
 发布版本： npm publish
+
+### Git规范和changelog 生成
+
+良好的 Git commit 规范优势
+- 加快 code Review 的流程
+- 根据Git Commit 元数据生成changeLog
+- 后续维护者可以知道 feature 被修改的原因
+
+
+如何使用husky
+
+[指引](https://github.com/yaogengzhu/daily-share/issues/161)
