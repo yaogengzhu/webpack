@@ -845,3 +845,15 @@ eslint --fix 自动修复
 - 是否有html 文件
 
 判断构建是否成功
+
+
+### 发布npm
+
+添加用户 npm adduser
+
+升级版本 (自动修改版本)
+- 升级补丁补丁版本： npm version patch
+- 升级小版本号：    npm version minor
+- 升级大版本：  npm version major
+
+发布版本： npm publish
