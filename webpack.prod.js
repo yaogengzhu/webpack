@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const path = require('path');
 const glob = require('glob');
 // const webpack = require('webpack');
@@ -7,6 +8,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 // const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
+// const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
+// const smp = new SpeedMeasurePlugin(); // 分析速度
 
 const setMAP = () => {
   const entry = {};
@@ -125,6 +130,7 @@ module.exports = {
     }),
     new CssMinimizerPlugin(),
     new FriendlyErrorsWebpackPlugin(),
+    new BundleAnalyzerPlugin(),
     // function () {
     //   this.hooks.done.tap('done', (stats) => {
     //     if (stats.compilation.errors) {

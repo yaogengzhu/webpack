@@ -869,3 +869,35 @@ eslint --fix 自动修复
 如何使用husky
 
 [指引](https://github.com/yaogengzhu/daily-share/issues/161)
+
+### 使用webapck 内置的stats
+
+```js
+{
+  ...
+  "build:stats": "webpack --config webpack.prod.js --json > stats.json",
+}
+```
+
+### 使用speed-measure-webpack-plugin 速度分析
+
+```bash
+pnpm add speed-measure-webpack-plugin -D
+```
+
+
+### 借助 webpack-bundle-analyzer 分析体积
+
+```bash
+pnpm add webpack-bundle-analyzer -D
+```
+
+```js
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
+...
+[
+  new BundleAnalyzerPlugin()
+]
+...
+```
