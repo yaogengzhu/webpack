@@ -6,25 +6,23 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+
 // const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 // const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-const threadLoader = require('thread-loader');
+// const threadLoader = require('thread-loader');
 // const smp = new SpeedMeasurePlugin(); // 分析速度
 
-threadLoader.warmup(
-  {
-    // 池选项，例如传递给 loader 选项
-    // 必须匹配 loader 选项才能启动正确的池
-  },
-  [
-    // 加载模块
-    // 可以是任意模块，例如
-    'babel-loader',
-    'less-loader',
-  ],
-);
+// threadLoader.warmup(
+//   {
+//   },
+//   [
+//     'babel-loader',
+//     'less-loader',
+//   ],
+// );
 
 const setMAP = () => {
   const entry = {};
@@ -177,6 +175,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new TerserPlugin({
+      parallel: false,
+    }),
     new MiniCssExtractPlugin({
       filename: '[name][contenthash:6].css',
     }),

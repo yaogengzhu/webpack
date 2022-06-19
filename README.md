@@ -921,3 +921,15 @@ happyPack 不做详细的介绍
 
 pnpm add thread-loader -S
 ```
+
+### 多进程并行压缩
+
+```bash
+ pnpm add webpack-parallel-uglify-plugin
+```
+
+更推荐使用 terser-webpack-plugin 
+
+```bash
+pnpm add terser-webpack-plugin 
+```
