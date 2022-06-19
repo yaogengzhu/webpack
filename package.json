@@ -14,16 +14,17 @@
     "author": "yaogengzhu",
     "license": "ISC",
     "dependencies": {
+        "autoprefixer": "^10.4.7",
+        "css-minimizer-webpack-plugin": "^4.0.0",
+        "friendly-errors-webpack-plugin": "^1.7.0",
+        "glob": "^8.0.3",
         "html-webpack-plugin": "^5.5.0",
         "lib-flexible": "^0.3.2",
+        "mini-css-extract-plugin": "^2.6.0",
         "react": "^18.1.0",
         "react-dom": "^18.1.0",
+        "thread-loader": "^3.0.4",
         "webpack": "^5.72.1",
-        "autoprefixer": "^10.4.7",
-        "glob": "^8.0.3",
-        "friendly-errors-webpack-plugin": "^1.7.0",
-        "mini-css-extract-plugin": "^2.6.0",
-        "css-minimizer-webpack-plugin": "^4.0.0",
         "webpack-bundle-analyzer": "^4.5.0"
     },
     "devDependencies": {

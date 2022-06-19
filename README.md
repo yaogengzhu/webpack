@@ -909,3 +909,15 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 v8 带来的优化 (for of 代替 forEach、Map Set 代替Object、 includes 替代indexOf)
 
 默认使用更快的md4 hash算法
+
+
+### 使用多进程/多实例构建：资源并行解析可选方案
+
+happyPack 不做详细的介绍
+
+使用thread-loader
+
+```bash
+
+pnpm add thread-loader -S
+```
