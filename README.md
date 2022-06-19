@@ -901,3 +901,11 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 ]
 ...
 ```
+
+### 使用高版本的Node webpack
+
+提升构建速度
+
+v8 带来的优化 (for of 代替 forEach、Map Set 代替Object、 includes 替代indexOf)
+
+默认使用更快的md4 hash算法
