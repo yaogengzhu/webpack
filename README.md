@@ -933,3 +933,7 @@ pnpm add thread-loader -S
 ```bash
 pnpm add terser-webpack-plugin 
 ```
+
+### 分包 设置Externals
+
+方法： 使用DLLPlugin 进行分包，DllReferencePlugin 对manifest.json 引用

@@ -5,8 +5,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+// const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const webpack = require('webpack');
 
 // const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 // const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
@@ -59,7 +60,7 @@ const { entry, htmlWebpackPlugin } = setMAP();
 module.exports = {
   // mode: 'none',
   mode: 'production',
-  stats: 'errors-only', // 发生错误时，才打印日志
+  // stats: 'errors-only', // 发生错误时，才打印日志
   entry,
   output: {
     clean: true,
@@ -175,6 +176,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DllReferencePlugin({
+      manifest: require('./build/libary/library.json')
+    }),
     new TerserPlugin({
       parallel: false,
     }),
@@ -182,7 +186,7 @@ module.exports = {
       filename: '[name][contenthash:6].css',
     }),
     new CssMinimizerPlugin(),
-    new FriendlyErrorsWebpackPlugin(),
+    // new FriendlyErrorsWebpackPlugin(),
     // new BundleAnalyzerPlugin(),
     // function () {
     //   this.hooks.done.tap('done', (stats) => {

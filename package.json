@@ -8,6 +8,7 @@
         "build": "webpack --config webpack.prod.js",
         "build:ssr": "webpack --config webpack.ssr.js",
         "build:stats": "webpack --config webpack.prod.js --json > stats.json",
+        "dll": "webpack --config webpack.dll.js",
         "watch": "webpack --watch"
     },
     "keywords": [],
