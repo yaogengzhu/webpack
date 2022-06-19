@@ -5,8 +5,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-// const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+
 const webpack = require('webpack');
 
 // const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
@@ -22,6 +23,7 @@ const webpack = require('webpack');
 //   [
 //     'babel-loader',
 //     'less-loader',
+
 //   ],
 // );
 
@@ -60,7 +62,7 @@ const { entry, htmlWebpackPlugin } = setMAP();
 module.exports = {
   // mode: 'none',
   mode: 'production',
-  // stats: 'errors-only', // 发生错误时，才打印日志
+  stats: 'errors-only', // 发生错误时，才打印日志
   entry,
   output: {
     clean: true,
@@ -73,47 +75,44 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.txt$/, use: 'raw-loader' },
+      { test: /\.txt$/, use: ['cache-loader', 'raw-loader'] },
       {
         test: /\.(js|jsx)$/,
         // use: ['thread-loader', 'babel-loader'],
         use: [
+          {
+            loader: 'cache-loader',
+          },
           {
             loader: 'thread-loader',
             options: {
               // 产生的 worker 的数量，默认是 (cpu 核心数 - 1)，或者，
               // 在 require('os').cpus() 是 undefined 时回退至 1
               workers: 2,
-
               // 一个 worker 进程中并行执行工作的数量
               // 默认为 20
               workerParallelJobs: 50,
-
               // 额外的 node.js 参数
               workerNodeArgs: ['--max-old-space-size=1024'],
-
               // 允许重新生成一个僵死的 work 池
               // 这个过程会降低整体编译速度
               // 并且开发环境应该设置为 false
               poolRespawn: false,
-
               // 闲置时定时删除 worker 进程
               // 默认为 500（ms）
               // 可以设置为无穷大，这样在监视模式(--watch)下可以保持 worker 持续存在
               poolTimeout: 2000,
-
               // 池分配给 worker 的工作数量
               // 默认为 200
               // 降低这个数值会降低总体的效率，但是会提升工作分布更均一
               poolParallelJobs: 50,
-
               // 池的名称
               // 可以修改名称来创建其余选项都一样的池
               name: 'my-pool',
             },
           },
           {
-            loader: 'babel-loader',
+            loader: 'babel-loader?cacheDirectory=true', // babel-loader 构建缓存
           },
         ],
       },
@@ -121,7 +120,7 @@ module.exports = {
       // { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: ['cache-loader', MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.less$/,
@@ -165,6 +164,9 @@ module.exports = {
           //   }
           // }
           {
+            loader: 'cache-loader',
+          },
+          {
             loader: 'file-loader',
             options: {
               name: '[name]_[hash:8][emoji].[ext]',
@@ -177,16 +179,19 @@ module.exports = {
   },
   plugins: [
     new webpack.DllReferencePlugin({
-      manifest: require('./build/libary/library.json')
+      manifest: require('./build/libary/library.json'),
     }),
     new TerserPlugin({
       parallel: false,
+      terserOptions: {
+        nameCache: null,
+      },
     }),
     new MiniCssExtractPlugin({
       filename: '[name][contenthash:6].css',
     }),
     new CssMinimizerPlugin(),
-    // new FriendlyErrorsWebpackPlugin(),
+    new FriendlyErrorsWebpackPlugin(),
     // new BundleAnalyzerPlugin(),
     // function () {
     //   this.hooks.done.tap('done', (stats) => {

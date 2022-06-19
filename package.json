@@ -16,9 +16,11 @@
     "license": "ISC",
     "dependencies": {
         "autoprefixer": "^10.4.7",
+        "cache-loader": "^4.1.0",
         "css-minimizer-webpack-plugin": "^4.0.0",
         "friendly-errors-webpack-plugin": "^1.7.0",
         "glob": "^8.0.3",
+        "hard-source-webpack-plugin": "^0.13.1",
         "html-webpack-plugin": "^5.5.0",
         "lib-flexible": "^0.3.2",
         "mini-css-extract-plugin": "^2.6.0",

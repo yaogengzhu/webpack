@@ -937,3 +937,20 @@ pnpm add terser-webpack-plugin
 ### 分包 设置Externals
 
 方法： 使用DLLPlugin 进行分包，DllReferencePlugin 对manifest.json 引用
+
+
+### 缓存
+
+目的： 提升二次构建速度
+
+缓存思路：
+- babel-loader
+- terser-webpack-plugin
+- cache-loader 或者 hard-soucrce-webpack-plugin
+
+
+```bash
+ pnpm add cache-loader 
+
+ pnpm add hard-soucrce-webpack-plugin # (webpack5.x 不再支持)
+``` 
